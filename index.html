@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SnackSip | The Ultimate All-in-One Snacking Cup</title>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- SWIPER -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+    />
+
+    <style>
+      :root {
+        --primary: #6c63ff;
+        --primary-dark: #564fd9;
+        --secondary: #ff6584;
+        --accent: #4cd7d0;
+        --dark: #2e2e3a;
+        --light: #f9f9ff;
+        --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--light);
+        color: var(--dark);
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      section {
+        padding: 100px 0;
+        position: relative;
+      }
+
+      .btn {
+        display: inline-block;
+        background: var(--primary);
+        color: white;
+        padding: 12px 28px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: var(--transition);
+        border: 2px solid var(--primary);
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+      }
+
+      .btn:hover {
+        background: transparent;
+        color: var(--primary);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(108, 99, 255, 0.4);
+      }
+
+      .btn-secondary {
+        background: var(--secondary);
+        border-color: var(--secondary);
+        box-shadow: 0 4px 15px rgba(255, 101, 132, 0.3);
+      }
+
+      .btn-secondary:hover {
+        color: var(--secondary);
+        box-shadow: 0 8px 25px rgba(255, 101, 132, 0.4);
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 70px;
+        position: relative;
+      }
+
+      .section-title h2 {
+        font-size: 2.8rem;
+        color: var(--dark);
+        margin-bottom: 15px;
+      }
+
+      .section-title p {
+        font-size: 1.2rem;
+        color: var(--primary);
+        font-weight: 500;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .section-title:after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        margin: 20px auto;
+        border-radius: 2px;
+      }
+
+      /* HEADER */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 25px 0;
+        z-index: 1000;
+        transition: var(--transition);
+      }
+
+      header.scrolled {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 15px 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%; /* Add this to make sure the container takes full height */
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--dark);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px; /* This adds space between text and icon */
+      }
+
+      .mug-icon {
+        width: 1.6rem; /* Match your original icon size */
+        height: 1.6rem;
+        transition: var(--transition);
+      }
+
+      .logo:hover .mug-icon {
+        transform: rotate(15deg);
+      }
+
+      .logo i {
+        color: var(--primary);
+        margin-left: 10px;
+        font-size: 1.6rem;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center; /* This will vertically center the links with the button */
+        gap: 35px;
+        height: 100%; /* Make nav-links take full height of header */
+      }
+
+      /* Remove any padding that might be pushing the button down */
+      .nav-links a:not(.btn) {
+        padding: 0; /* Remove any default padding */
+      }
+
+      /* Ensure the button has the same vertical alignment */
+      .nav-links .btn {
+        margin: 0; /* Remove any margins that might offset it */
+        padding: 12px 28px; /* Keep your original button padding */
+      }
+
+      .nav-links a {
+        color: var(--dark);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.05rem;
+        position: relative;
+        transition: var(--transition);
+      }
+
+      .nav-links a:after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover:after {
+        width: 100%;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .menu-btn {
+        display: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: var(--dark);
+      }
+
+      /* HERO SECTION */
+      .hero {
+        height: auto;
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding: 120px 0 250px; /* Increased bottom padding for highlight cards */
+      }
+
+      .hero:before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(108, 99, 255, 0.08) 0%,
+          rgba(255, 255, 255, 0) 70%
+        );
+        z-index: -1;
+      }
+
+      .hero-content {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+        margin-bottom: 100px; /* Added space between content and highlight cards */
+      }
+
+      .hero-text {
+        flex: 1;
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero-text h1 {
+        font-size: 3.8rem;
+        line-height: 1.2;
+        margin-bottom: 20px;
+        color: var(--dark);
+      }
+
+      .hero-text h1 span {
+        color: var(--primary);
+      }
+
+      .hero-text p {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-bottom: 40px;
+        color: #555;
+        max-width: 600px;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 20px;
+      }
+
+      .hero-image {
+        filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.15));
+        width: 400px; /* Bigger size for impact */
+        height: 400px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        perspective: 1000px; /* Adds depth */
+      }
+
+      .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 70% 30% 65% 35% / 40% 55% 45% 60%; /* Refined organic shape */
+        shape-outside: ellipse(45% 50% at 50% 50%);
+        transition: all 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+        will-change: transform, border-radius, filter;
+        border: 4px solid rgba(255, 255, 255, 0.25);
+        box-shadow: inset 0 0 25px rgba(255, 255, 255, 0.4),
+          0 5px 50px rgba(0, 0, 0, 0.1);
+        transform-style: preserve-3d; /* Enhances depth */
+      }
+
+      .hero-image:hover img {
+        border-radius: 55% 45% 50% 50% / 45% 50% 50% 55%; /* Smoother morph */
+        transform: translateY(-12px) rotate(3deg) scale(1.03);
+        filter: drop-shadow(0 25px 40px rgba(0, 0, 0, 0.2));
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.6),
+          0 10px 60px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Subtle continuous floating animation */
+      @keyframes gentleFloat {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-15px) rotate(1deg);
+        }
+      }
+
+      .hero-image:not(:hover) img {
+        animation: gentleFloat 8s ease-in-out infinite;
+      }
+
+      /* Optional: Add a soft gradient overlay for depth */
+      .hero-image::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0) 50%
+        );
+        pointer-events: none;
+      }
+
+      .hero-highlights {
+        position: absolute;
+        bottom: 50px; /* Positions cards at bottom of hero */
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+      }
+
+      .highlight-item {
+        background: white;
+        padding: 40px 30px; /* Increased vertical padding */
+        border-radius: 20px;
+        text-align: center;
+        width: 280px; /* Increased from 250px */
+        min-height: 260px; /* Increased from 220px */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .highlight-item i {
+        font-size: 3.5rem; /* Increased from 3rem */
+        color: var(--primary);
+        margin-bottom: 25px; /* More space below icon */
+      }
+
+      .highlight-item h4 {
+        font-size: 1.4rem; /* Increased from 1.3rem */
+        margin-bottom: 15px;
+      }
+
+      .highlight-item p {
+        font-size: 1.1rem; /* Increased from 1rem */
+        line-height: 1.6;
+      }
+
+      .highlight-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+      }
+
+      /* ABOUT SECTION */
+      .about {
+        background-color: white;
+        position: relative;
+        padding-top: 30px; /* Reduced from 150px */
+        padding-bottom: 60px; /* Reduced from whatever it was */
+      }
+
+      .about:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: none; /* Remove gradient overlay */
+        height: 30px; /* Reduced from 100px */
+        background: linear-gradient(
+          to bottom,
+          rgba(249, 249, 255, 1),
+          rgba(249, 249, 255, 0)
+        );
+        z-index: 1;
+      }
+
+      .about-content {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+      }
+
+      .about-image {
+        flex: 1;
+        position: relative;
+      }
+
+      .about-image img {
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+      }
+
+      .about-image:hover img {
+        transform: scale(1.02);
+      }
+
+      .about-image:after {
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 100%;
+        height: 100%;
+        border: 2px dashed var(--primary);
+        border-radius: 20px;
+        z-index: -1;
+        opacity: 0.5;
+      }
+
+      .about-text {
+        flex: 1;
+      }
+
+      .about-text h3 {
+        font-size: 2.2rem;
+        margin-bottom: 25px;
+        color: var(--dark);
+      }
+
+      .about-text p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 30px;
+        color: #555;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 40px;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .feature-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(108, 99, 255, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .feature-icon i {
+        font-size: 1.4rem;
+        color: var(--primary);
+      }
+
+      .feature-text h4 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+      }
+
+      .feature-text p {
+        font-size: 0.95rem;
+        margin-bottom: 0;
+        color: #777;
+      }
+
+      /* PRODUCTS SECTION */
+      .products {
+        background-color: var(--light);
+        position: relative;
+        overflow: hidden;
+        padding: 60px 0; /* Reduced from 100px 0 */
+        padding-top: 30px !important; /* Reduce main padding */
+        padding-bottom: 100px; /* Keeping original bottom padding */
+      }
+
+      .products:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 1),
+          rgba(255, 255, 255, 0)
+        );
+        z-index: 1;
+        display: none; /* Removes it entirely */
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+      }
+
+      .product-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: var(--secondary);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        z-index: 2;
+      }
+
+      .product-image {
+        height: 250px;
+        background: #f5f5ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-image img {
+        max-width: 80%;
+        max-height: 80%;
+        transition: var(--transition);
+      }
+
+      .product-card:hover .product-image img {
+        transform: scale(1.05);
+      }
+
+      .product-info {
+        padding: 25px;
+      }
+
+      .product-info h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: var(--dark);
+      }
+
+      .product-info .price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin: 15px 0;
+      }
+
+      .product-info .tagline {
+        font-style: italic;
+        color: var(--secondary);
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+      }
+
+      .product-info ul {
+        margin-bottom: 25px;
+      }
+
+      .product-info ul li {
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #555;
+      }
+
+      .product-info ul li i {
+        color: var(--primary);
+        font-size: 0.8rem;
+      }
+      /* ===== BENEFITS SECTION - MODERN REDESIGN ===== */
+      .benefits {
+        background: linear-gradient(
+          145deg,
+          var(--primary-dark) 0%,
+          var(--primary) 100%
+        );
+        color: white;
+        position: relative;
+        overflow: hidden;
+        padding: 60px 0 80px;
+        isolation: isolate; /* Contains the pseudo-element */
+      }
+
+      .benefits::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            circle at 20% 30%,
+            rgba(255, 255, 255, 0.08) 0%,
+            transparent 30%
+          ),
+          url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='1' fill='white' fill-opacity='0.1'/%3E%3C/svg%3E");
+        background-size: cover;
+        z-index: -1;
+      }
+
+      .benefits .section-title {
+        margin-bottom: 50px;
+      }
+
+      .benefits .section-title h2 {
+        font-size: 2.5rem;
+        background: linear-gradient(to right, white, var(--accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+      }
+
+      .benefits .section-title p {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.85);
+        max-width: 600px;
+      }
+
+      .benefits .section-title::after {
+        background: linear-gradient(90deg, var(--accent), white);
+        width: 100px;
+      }
+
+      /* ===== MODERN CARD SLIDER ===== */
+      .benefits-slider {
+        position: relative;
+        padding: 0 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .benefit-card {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 16px;
+        padding: 30px;
+        min-height: 280px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05),
+          0 10px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: grab;
+      }
+
+      .benefit-card:hover {
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1),
+          0 15px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .benefit-icon {
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(
+          135deg,
+          var(--accent),
+          rgba(255, 255, 255, 0.2)
+        );
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        margin: 0 auto 20px;
+        font-size: 1.4rem;
+        color: white;
+        transition: transform 0.4s ease;
+      }
+
+      .benefit-card:hover .benefit-icon {
+        transform: rotate(8deg) scale(1.1);
+      }
+
+      .benefit-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        background: linear-gradient(to right, white, rgba(255, 255, 255, 0.8));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .benefit-card p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.85);
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .benefit-author {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: auto;
+        padding-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        width: 100%;
+        justify-content: center;
+      }
+
+      .benefit-author img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .benefit-card:hover .benefit-author img {
+        border-color: var(--accent);
+        transform: scale(1.1);
+      }
+
+      .benefit-author-info h4 {
+        font-size: 0.95rem;
+        margin-bottom: 2px;
+        font-weight: 500;
+      }
+
+      .benefit-author-info p {
+        font-size: 0.75rem;
+        opacity: 0.7;
+        margin-bottom: 0;
+      }
+
+      /* ===== ENHANCED SWIPER CONTROLS ===== */
+      .swiper-pagination-bullet {
+        background: rgba(255, 255, 255, 0.4);
+        width: 10px;
+        height: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .swiper-pagination-bullet-active {
+        background: var(--accent);
+        transform: scale(1.3);
+      }
+
+      .swiper-button-next,
+      .swiper-button-prev {
+        color: white;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(5px);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+
+      .swiper-button-next:hover,
+      .swiper-button-prev:hover {
+        background: var(--accent);
+        transform: scale(1.1);
+      }
+
+      .swiper-button-next::after,
+      .swiper-button-prev::after {
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+
+      /* ===== RESPONSIVE ADJUSTMENTS ===== */
+      @media (max-width: 768px) {
+        .benefits {
+          padding: 50px 0;
+        }
+
+        .benefits .section-title h2 {
+          font-size: 2rem;
+        }
+
+        .benefits-slider {
+          padding: 0 20px;
+        }
+
+        .benefit-card {
+          min-height: 260px;
+          padding: 25px;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .benefit-card {
+          min-height: 240px;
+          padding: 20px;
+        }
+
+        .benefit-icon {
+          width: 48px;
+          height: 48px;
+          font-size: 1.2rem;
+        }
+
+        .benefit-card h3 {
+          font-size: 1.2rem;
+        }
+
+        .benefit-card p {
+          font-size: 0.9rem;
+        }
+      }
+
+      .swiper-pagination-bullet {
+        background: white;
+        opacity: 0.5;
+        width: 12px;
+        height: 12px;
+        transition: var(--transition);
+      }
+
+      .swiper-pagination-bullet-active {
+        background: var(--accent);
+        opacity: 1;
+        transform: scale(1.2);
+      }
+
+      .swiper-button-next,
+      .swiper-button-prev {
+        color: white;
+        background: rgba(255, 255, 255, 0.2);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        backdrop-filter: blur(5px);
+        transition: var(--transition);
+      }
+
+      .swiper-button-next:hover,
+      .swiper-button-prev:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+      }
+
+      .swiper-button-next:after,
+      .swiper-button-prev:after {
+        font-size: 1rem;
+      }
+
+      /* FAQ SECTION */
+      .faq {
+        background-color: white;
+      }
+
+      .faq-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .faq-item {
+        margin-bottom: 20px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+      }
+
+      .faq-item:hover {
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+      }
+
+      .faq-question {
+        background: var(--light);
+        color: var(--dark);
+        padding: 20px 25px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: var(--transition);
+      }
+
+      .faq-question:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      .faq-question i {
+        transition: var(--transition);
+      }
+
+      .faq-answer {
+        background: white;
+        padding: 0 25px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+      }
+
+      .faq-item.active .faq-question {
+        background: var(--primary);
+        color: white;
+      }
+
+      .faq-item.active .faq-question i {
+        transform: rotate(180deg);
+      }
+
+      .faq-item.active .faq-answer {
+        padding: 25px;
+        max-height: 500px;
+      }
+
+      /* CTA SECTION */
+      .cta {
+        background: linear-gradient(135deg, var(--secondary) 0%, #ff8a9d 100%);
+        color: white;
+        text-align: center;
+        padding: 100px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("dot-pattern-white.png") center/cover;
+        opacity: 0.1;
+        z-index: 0;
+      }
+
+      .cta-container {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .cta h2 {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+      }
+
+      .cta p {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+        opacity: 0.9;
+      }
+
+      .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      /* FOOTER */
+      footer {
+        background: var(--dark);
+        color: white;
+        padding: 80px 0 30px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+        margin-bottom: 60px;
+      }
+
+      .footer-col h3 {
+        font-size: 1.3rem;
+        margin-bottom: 25px;
+        position: relative;
+        padding-bottom: 15px;
+      }
+
+      .footer-col h3:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: var(--primary);
+      }
+
+      .footer-col p {
+        margin-bottom: 20px;
+        opacity: 0.8;
+        line-height: 1.8;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 15px;
+      }
+
+      .footer-links a {
+        color: white;
+        opacity: 0.8;
+        text-decoration: none;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .footer-links a:hover {
+        opacity: 1;
+        color: var(--accent);
+        transform: translateX(5px);
+      }
+
+      .footer-links a i {
+        font-size: 0.8rem;
+        color: var(--primary);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: white;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        background: var(--primary);
+        transform: translateY(-5px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 30px;
+        text-align: center;
+      }
+
+      .footer-bottom p {
+        opacity: 0.7;
+        font-size: 0.9rem;
+      }
+
+      /* ANIMATIONS */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1200px) {
+        .hero-content {
+          gap: 40px;
+        }
+
+        .hero-text h1 {
+          font-size: 3.2rem;
+        }
+
+        .about-content {
+          gap: 40px;
+        }
+
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 992px) {
+        section {
+          padding: 80px 0;
+        }
+
+        .hero {
+          padding: 100px 0 200px;
+        }
+
+        .hero-content {
+          flex-direction: column;
+          margin-bottom: 80px;
+        }
+
+        .hero-highlights {
+          position: relative;
+          bottom: auto;
+          margin-top: 80px;
+          flex-wrap: wrap;
+        }
+
+        .hero-text {
+          text-align: center;
+          margin-bottom: 60px;
+        }
+
+        .hero-text p {
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .hero-buttons {
+          justify-content: center;
+        }
+
+        .about-content {
+          flex-direction: column;
+        }
+
+        .about-image {
+          margin-bottom: 50px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero {
+          margin-top: 60px;
+          padding: 120px 0 250px; /* More bottom padding for stacked cards */
+        }
+
+        .hero-highlights {
+          position: relative;
+          bottom: auto;
+          margin-top: 80px;
+          flex-wrap: wrap;
+          gap: 40px;
+          padding: 0 20px;
+        }
+
+        .highlight-item {
+          width: 100%;
+          max-width: 320px; /* Increased max-width */
+          min-height: 240px;
+          padding: 35px 25px;
+        }
+
+        .highlight-item i {
+          font-size: 3rem;
+        }
+
+        .menu-btn {
+          display: block;
+        }
+
+        .nav-links {
+          position: fixed;
+          top: 90px;
+          left: -100%;
+          width: 100%;
+          height: calc(100vh - 90px);
+          background: white;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 30px;
+          transition: var(--transition);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links.active {
+          left: 0;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        /* Individual slides */
+        .benefits-slider .swiper-slide {
+          width: 280px; /* Make cards slightly narrower */
+          max-width: 400px; /* Optional: set max width */
+        }
+
+        /* Benefit cards */
+        .benefit-card {
+          margin: 0 10px; /* Horizontal spacing */
+          /* Your existing card styles */
+        }
+
+        .cta h2 {
+          font-size: 2.2rem;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .hero {
+          padding: 80px 0 180px;
+        }
+
+        .hero-highlights {
+          gap: 20px;
+        }
+        .section-title h2 {
+          font-size: 1.8rem;
+        }
+
+        .hero-text h1 {
+          font-size: 2.5rem;
+        }
+
+        .highlight-item {
+          width: 100%;
+        }
+
+        .highlight-item {
+          max-width: 280px;
+          min-height: 220px;
+        }
+
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Cart Styles */
+      .cart-toggle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        padding: 8px 15px;
+        border-radius: 50px;
+        transition: var(--transition);
+      }
+
+      .cart-toggle:hover {
+        background: rgba(108, 99, 255, 0.1);
+      }
+
+      .cart-toggle i {
+        font-size: 1.2rem;
+      }
+
+      #cart-count {
+        background: var(--secondary);
+        color: white;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .cart-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 320px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: var(--transition);
+      }
+
+      .cart-dropdown.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .cart-items {
+        max-height: 300px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+      }
+
+      .empty-cart {
+        text-align: center;
+        padding: 20px;
+        color: #777;
+      }
+
+      .cart-item {
+        display: flex;
+        gap: 15px;
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .cart-item img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
+      .cart-item-details {
+        flex: 1;
+      }
+
+      .cart-item h4 {
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+
+      .cart-item-price {
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 8px;
+      }
+
+      .cart-item-quantity {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .quantity-btn {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #f5f5ff;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+      }
+
+      .quantity-btn:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      .remove-item {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        color: #777;
+        cursor: pointer;
+        transition: var(--transition);
+        align-self: flex-start;
+      }
+
+      .remove-item:hover {
+        color: var(--secondary);
+      }
+
+      .cart-footer {
+        border-top: 1px solid #eee;
+        padding-top: 15px;
+      }
+
+      .cart-total {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      .cart-total span {
+        color: var(--primary);
+      }
+
+      .cart-notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--primary);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 10000;
+      }
+
+      .cart-notification.show {
+        transform: translateX(0);
+      }
+
+      /* Checkout Page Styles */
+      .checkout {
+        padding: 80px 0;
+      }
+
+      .checkout-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+
+      .checkout-form h2,
+      .order-summary h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+        color: var(--dark);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-family: "Poppins", sans-serif;
+        transition: var(--transition);
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+      }
+
+      .order-summary {
+        background: #f9f9ff;
+        padding: 30px;
+        border-radius: 15px;
+      }
+
+      .order-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .order-item-name {
+        display: flex;
+        gap: 10px;
+      }
+
+      .order-item-price {
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .order-total {
+        margin-top: 20px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+      }
+
+      .grand-total {
+        font-weight: 700;
+        font-size: 1.1rem;
+        border-top: 1px solid #eee;
+        margin-top: 10px;
+        padding-top: 15px;
+      }
+
+      @media (max-width: 768px) {
+        .checkout-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .order-summary {
+          order: -1;
+        }
+      }
+    </style>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%236c63ff' d='M400 192H32C14.3 192 0 177.7 0 160s14.3-32 32-32h368c17.7 0 32 14.3 32 32s-14.3 32-32 32zm0 64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h368zm-16 64c0 17.7-14.3 32-32 32H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h288c17.7 0 32 14.3 32 32zm-64 96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32h192c17.7 0 32 14.3 32 32zM128 96c0-17.7 14.3-32 32-32s32 14.3 32 32v32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H192v32h96c53 0 96-43 96-96h16c61.8 0 112-50.1 112-112S461.8 0 400 0H112C50.1 0 0 50.1 0 112s50.1 112 112 112h16z'/></svg>"
+      type="image/svg+xml"
+    />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header id="header">
+      <div class="container header-container">
+        <a href="index.html" class="logo">
+          SnackSip
+          <svg class="mug-icon" viewBox="0 0 512 512" width="20" height="20">
+            <path
+              fill="#6c63ff"
+              d="M400 192H32C14.3 192 0 177.7 0 160s14.3-32 32-32h368c17.7 0 32 14.3 32 32s-14.3 32-32 32zm0 64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h368zm-16 64c0 17.7-14.3 32-32 32H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h288c17.7 0 32 14.3 32 32zm-64 96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32s14.3-32 32-32h192c17.7 0 32 14.3 32 32zM128 96c0-17.7 14.3-32 32-32s32 14.3 32 32v32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H192v32h96c53 0 96-43 96-96h16c61.8 0 112-50.1 112-112S461.8 0 400 0H112C50.1 0 0 50.1 0 112s50.1 112 112 112h16z"
+            />
+          </svg>
+        </a>
+        <div class="menu-btn" id="menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <nav class="nav-links" id="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#products">Products</a>
+          <a href="#benefits">Benefits</a>
+          <a href="#faq">FAQ</a>
+          <div class="cart-toggle" id="cart-toggle">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count">0</span>
+            <div class="cart-dropdown" id="cart-dropdown">
+              <div class="cart-items" id="cart-items">Your cart is empty</div>
+              <div class="cart-footer">
+                <div class="cart-total">
+                  Total: <span id="cart-total">RM 0.00</span>
+                </div>
+                <a href="checkout.html" class="btn">Checkout</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Snack & Sip with <span>Just One Hand</span></h1>
+            <p>
+              The revolutionary all-in-one cup that combines your favorite
+              snacks and drinks in a single, convenient design. Perfect for busy
+              lifestyles, parents, and anyone who values convenience.
+            </p>
+            <div class="hero-buttons">
+              <a href="#products" class="btn">Shop Now</a>
+              <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="image/snacksip-hero.png" alt="SnackSip Product" />
+          </div>
+        </div>
+
+        <div class="hero-highlights">
+          <div class="highlight-item">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h4>One-Hand Use</h4>
+            <p>Perfect for multitasking</p>
+          </div>
+          <div class="highlight-item">
+            <i class="fas fa-leaf"></i>
+            <h4>Eco Friendly</h4>
+            <p>Reusable & sustainable</p>
+          </div>
+          <div class="highlight-item">
+            <i class="fas fa-utensils"></i>
+            <h4>Built-in Blade</h4>
+            <p>Cut food on the go</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="section-title">
+          <h2>About SnackSip</h2>
+          <p>
+            More than just a cup - it's a lifestyle revolution designed for
+            modern convenience
+          </p>
+        </div>
+
+        <div class="about-content">
+          <div class="about-image">
+            <img src="image/snacksip-about.png" alt="About SnackSip" />
+          </div>
+          <div class="about-text">
+            <h3>Redefining Convenience</h3>
+            <p>
+              Born from a simple idea to make life easier, SnackSip combines
+              thoughtful innovation with practical design. Our patented
+              two-in-one system lets you carry both snacks and drinks in a
+              single, stylish container.
+            </p>
+            <p>
+              Whether you're a busy professional, a student rushing between
+              classes, or a parent juggling multiple tasks, SnackSip adapts to
+              your lifestyle seamlessly.
+            </p>
+
+            <div class="features-grid">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-hand-paper"></i>
+                </div>
+                <div class="feature-text">
+                  <h4>One-Hand Operation</h4>
+                  <p>
+                    Designed for accessibility and ease of use with just one
+                    hand
+                  </p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-recycle"></i>
+                </div>
+                <div class="feature-text">
+                  <h4>Eco Conscious</h4>
+                  <p>
+                    Made from premium BPA-free materials that last for years
+                  </p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-blender"></i>
+                </div>
+                <div class="feature-text">
+                  <h4>Built-in Blade</h4>
+                  <p>Cut soft fruits and snacks without needing extra tools</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div class="feature-text">
+                  <h4>Social Impact</h4>
+                  <p>We employ and train people from underserved communities</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section class="products" id="products">
+      <div class="container">
+        <div class="section-title">
+          <h2>Our Products</h2>
+          <p>Choose the perfect SnackSip for your lifestyle and needs</p>
+        </div>
+
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-badge">BEST SELLER</div>
+            <div class="product-image">
+              <img src="image/snacksip-large.jpg" alt="SnackSip Large" />
+            </div>
+            <div class="product-info">
+              <h3>SnackSip Large</h3>
+              <div class="price">RM 4.99</div>
+              <p class="tagline">"More Sip, More Snack, More Satisfaction!"</p>
+              <ul>
+                <li><i class="fas fa-check"></i> 750ml drink capacity</li>
+                <li><i class="fas fa-check"></i> 300ml snack compartment</li>
+                <li><i class="fas fa-check"></i> Includes carrying strap</li>
+                <li><i class="fas fa-check"></i> Perfect for all-day use</li>
+                <li><i class="fas fa-check"></i> Dishwasher safe</li>
+              </ul>
+              <a href="#" class="btn" data-product-id="1">Add to Cart</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img src="image/snacksip-medium.jpg" alt="SnackSip Medium" />
+            </div>
+            <div class="product-info">
+              <h3>SnackSip Medium</h3>
+              <div class="price">RM 3.99</div>
+              <p class="tagline">"The Perfect Balance of Snack & Sip"</p>
+              <ul>
+                <li><i class="fas fa-check"></i> 500ml drink capacity</li>
+                <li><i class="fas fa-check"></i> 200ml snack compartment</li>
+                <li><i class="fas fa-check"></i> Fits standard cup holders</li>
+                <li><i class="fas fa-check"></i> Ideal for work or school</li>
+                <li><i class="fas fa-check"></i> Dishwasher safe</li>
+              </ul>
+              <a href="#" class="btn" data-product-id="2">Add to Cart</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-badge">NEW</div>
+            <div class="product-image">
+              <img src="image/snacksip-small.jpg" alt="SnackSip Small" />
+            </div>
+            <div class="product-info">
+              <h3>SnackSip Small</h3>
+              <div class="price">RM 1.99</div>
+              <p class="tagline">"Light, Quick, and Kid-Friendly!"</p>
+              <ul>
+                <li><i class="fas fa-check"></i> 300ml drink capacity</li>
+                <li><i class="fas fa-check"></i> 150ml snack compartment</li>
+                <li><i class="fas fa-check"></i> Perfect for kids</li>
+                <li><i class="fas fa-check"></i> Leak-proof lid</li>
+                <li><i class="fas fa-check"></i> Dishwasher safe</li>
+              </ul>
+              <a href="#" class="btn" data-product-id="3">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS SECTION -->
+    <section class="benefits" id="benefits">
+      <div class="container">
+        <div class="section-title">
+          <h2>Why People Love SnackSip</h2>
+          <p>
+            Hear what our customers say about how SnackSip has improved their
+            daily routines
+          </p>
+        </div>
+
+        <div class="benefits-slider swiper-container">
+          <div class="swiper-wrapper">
+            <div class="benefit-card swiper-slide">
+              <div class="benefit-icon">
+                <i class="fas fa-baby"></i>
+              </div>
+              <h3>Parent's Best Friend</h3>
+              <p>
+                "As a mom of twins, SnackSip has been a game-changer. I can
+                carry their drinks and snacks in one hand while holding both
+                their hands with the other. The built-in blade is perfect for
+                cutting up fruit at the park!"
+              </p>
+            </div>
+
+            <div class="benefit-card swiper-slide">
+              <div class="benefit-icon">
+                <i class="fas fa-laptop"></i>
+              </div>
+              <h3>Work From Home Essential</h3>
+              <p>
+                "I'm constantly snacking while working, and SnackSip keeps my
+                desk clean and organized. No more separate cups and bowls
+                cluttering my workspace. Plus, the one-hand operation means I
+                can keep typing while eating!"
+              </p>
+            </div>
+
+            <div class="benefit-card swiper-slide">
+              <div class="benefit-icon">
+                <i class="fas fa-hiking"></i>
+              </div>
+              <h3>Outdoor Adventure Companion</h3>
+              <p>
+                "Whether I'm hiking or biking, SnackSip is perfect for keeping
+                my energy up. The secure lid prevents spills, and I love that I
+                can carry nuts in one compartment and water in the other. No
+                more fumbling with multiple containers!"
+              </p>
+            </div>
+          </div>
+
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+          <p>Everything you need to know about SnackSip</p>
+        </div>
+
+        <div class="faq-container">
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>What materials are used in SnackSip?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                All SnackSip products are made from premium BPA-free, food-grade
+                plastic that's durable and safe for both hot and cold contents.
+                The built-in blade is made from stainless steel.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Is SnackSip dishwasher safe?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Yes! All components of SnackSip are dishwasher safe. We
+                recommend placing it on the top rack for best results.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>How do I clean the built-in blade?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                The blade can be easily cleaned with warm soapy water. A small
+                brush is included with your purchase to help clean hard-to-reach
+                areas. Always ensure the blade is completely dry before storing.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>What's your return policy?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                We offer a 30-day money-back guarantee if you're not completely
+                satisfied with your SnackSip. Simply contact our customer
+                service team to initiate a return.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Do you ship internationally?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Yes! We ship worldwide. Shipping costs and delivery times vary
+                by location. You'll see the exact shipping costs at checkout
+                before completing your purchase.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta">
+      <div class="container cta-container">
+        <h2>Ready to Revolutionize Your Snacking?</h2>
+        <p>
+          Join thousands of happy customers who have made SnackSip their daily
+          essential
+        </p>
+        <div class="cta-buttons">
+          <a href="checkout.html" class="btn">Shop Now</a>
+          <a
+            href="https://api.whatsapp.com/send?phone=60173403412"
+            class="btn btn-secondary"
+            >Contact Us</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3>SnackSip</h3>
+            <p>
+              Redefining convenience with innovative design that combines snacks
+              and drinks in one perfect package.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#home"><i class="fas fa-chevron-right"></i> Home</a>
+              </li>
+              <li>
+                <a href="#about"><i class="fas fa-chevron-right"></i> About</a>
+              </li>
+              <li>
+                <a href="#products"
+                  ><i class="fas fa-chevron-right"></i> Products</a
+                >
+              </li>
+              <li>
+                <a href="#benefits"
+                  ><i class="fas fa-chevron-right"></i> Benefits</a
+                >
+              </li>
+              <li>
+                <a href="#faq"><i class="fas fa-chevron-right"></i> FAQ</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Support</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i> Contact Us</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i> Shipping Policy</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i> Returns & Refunds</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i> Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i> Terms of Service</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Contact Info</h3>
+            <p>
+              <i class="fas fa-map-marker-alt"></i> Jln Tun Razak, Bandar Alor
+              Setar, 05200 Alor Setar, Kedah
+            </p>
+            <p><i class="fas fa-phone"></i> +60 17-340 3412</p>
+            <p><i class="fas fa-envelope"></i> hellosnacksip@gmail.com</p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>
+            &copy; 2025 SnackSip. All Rights Reserved. Designed with
+            <i class="fas fa-heart"></i> by Ziyat Tech Solution
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- SWIPER JS -->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="cart.js"></script>
+
+    <!-- MAIN JS -->
+    <script>
+      // Mobile Menu Toggle
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+
+      menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+        });
+      });
+
+      // Header Scroll Effect
+      window.addEventListener("scroll", () => {
+        const header = document.getElementById("header");
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // FAQ Accordion
+      const faqItems = document.querySelectorAll(".faq-item");
+
+      faqItems.forEach((item) => {
+        const question = item.querySelector(".faq-question");
+
+        question.addEventListener("click", () => {
+          // Close all other items
+          faqItems.forEach((otherItem) => {
+            if (otherItem !== item) {
+              otherItem.classList.remove("active");
+            }
+          });
+
+          // Toggle current item
+          item.classList.toggle("active");
+        });
+      });
+
+      // Initialize Swiper
+      const swiper = new Swiper(".swiper-container", {
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+
+      const benefitsSwiper = new Swiper(".benefits-slider", {
+        slidesPerView: "auto",
+        spaceBetween: 20,
+        centeredSlides: true,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+  </body>
+</html>
